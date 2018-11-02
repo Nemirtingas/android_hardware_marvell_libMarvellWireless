@@ -1,5 +1,6 @@
 #
-# Copyright 2012 The Android Open Source Project
+# Copyright (C) 2018 The LineageOS Project
+#                     Nemirtingas <nanaki89@hotmail.fr>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,33 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-LOCAL_PATH := $(call my-dir)
-
-ifeq ($(BOARD_HAVE_BLUETOOTH_MRVL),true)
-
-
+LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
+LOCAL_SRC_FILES:= \
+	lib_marvell_wireless.c
 
-BDROID_DIR:= external/bluetooth/bluedroid
 LOCAL_C_INCLUDES += \
-        hardware/mrvl/libMarvellWireless \
-        $(BDROID_DIR)/hci/include
-
-LOCAL_SRC_FILES := \
-        bt_vendor_mrvl.c
+    $(LOCAL_PATH)/..
 
 LOCAL_SHARED_LIBRARIES := \
-        libMarvellWireless \
-        libcutils \
-        liblog
+	libc	\
+    libcutils \
+    libutils 
 
-LOCAL_MODULE := libbt-vendor
+LOCAL_STATIC_LIBRARIES += 
+
+LOCAL_MODULE:= libMarvellWireless
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_MODULE_OWNER := mrvl
-#LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib
 
+LOCAL_CFLAGS += -Werror
+LOCAL_PRELINK_MODULE := false
 include $(BUILD_SHARED_LIBRARY)
-
-endif # BOARD_HAVE_BLUETOOTH_MRVL
