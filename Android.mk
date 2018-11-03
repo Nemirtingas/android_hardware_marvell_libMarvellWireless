@@ -1,3 +1,10 @@
-ifneq ($(filter pxa1908,$(TARGET_BOARD_PLATFORM)),)
-    include $(call all-named-subdir-makefiles,pxa1908)
+ifeq ($(TARGET_BOARD_SOC),pxa1908)
+    PXADIRS := pxa1908
+endif
+ifeq ($(TARGET_BOARD_SOC),pxa1088)
+    PXADIRS := pxa1088
+endif
+
+ifneq ($(PXADIRS),)
+    include $(call all-named-subdir-makefiles,$(PXADIRS))
 endif
