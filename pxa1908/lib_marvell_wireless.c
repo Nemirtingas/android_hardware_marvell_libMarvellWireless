@@ -16,6 +16,7 @@
  */
 #define LOG_TAG "libMarvellWireless"
 #include <stdio.h>
+#include <string.h>
 #include <utils/Log.h>
 #include <stdlib.h>
 #include <sys/types.h>  
